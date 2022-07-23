@@ -1,0 +1,29 @@
+<%-layout('layouts/boilerplate')-%>
+<h1>add money</h1>
+<form action="buysell/buy" method="POST" class="needs-validation" novalidate>
+  <div class="mb-3">
+    <label class="form-label" for="price">Price</label>
+    <input class="form-control" type="number" id="price" name="x1" required />
+    <div class="valid-feedback">Looks good!</div>
+  </div>
+  <div class="mb-3">
+    <label class="form-label" for="companyname">Company</label>
+    <input
+      class="form-control"
+      type="text"
+      id="companyname"
+      name="y"
+      required
+    />
+    <div class="valid-feedback">Looks good!</div>
+  </div>
+  <div class="mb-3">
+    <label class="form-label" for="sharename">Invested In</label>
+    <input class="form-control" type="text" id="sharename" name="z" required />
+    <div class="valid-feedback">Looks good!</div>
+  </div>
+  <button class="btn btn-success" type="submit">buy</button>
+  <button class="btn btn-success" type="submit" formaction="/buysell/sell">
+    sell
+  </button>
+</form>
