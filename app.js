@@ -16,6 +16,8 @@ const LocalStrategy = require('passport-local');
 const { middleware } = require('./middleware');
 const axios=require('axios');
 const port=process.env.port ||3000;
+const dotenv=require('dotenv');
+dotenv.config();
 
 
 
@@ -26,7 +28,7 @@ const port=process.env.port ||3000;
 //connecting database
 
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/fake-data2', {
+mongoose.connect(`${process.env.MONGODB_URL}`, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 
