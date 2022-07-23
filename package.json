@@ -15,5 +15,8 @@
     "passport-local-mongoose": "^7.1.2",
     "path": "^0.12.7",
     "routes": "^2.1.0"
+  },
+  "scripts":{
+    "start" : "node app.js"
   }
 }

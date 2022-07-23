@@ -15,6 +15,7 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const { middleware } = require('./middleware');
 const axios=require('axios');
+const port=process.env.port ||3000;
 
 
 
@@ -114,6 +115,6 @@ app.use('/buysell', buysell);
 
 //listen
 
-app.listen(3000, () => {
-    console.log('Serving on port 3000')
+app.listen(port, () => {
+    console.log(`Serving on port ${port}`);
 })
