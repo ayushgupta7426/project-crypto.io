@@ -26,7 +26,7 @@ dotenv.config();
 
 
 
-
+//connecting databa
 
 const mongoose = require('mongoose');
 mongoose.connect(`${process.env.MONGODB_URL}`, {

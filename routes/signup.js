@@ -9,8 +9,10 @@ router.get('/',(req,res)=>{
     res.render('users/register');
 })
 
-router.post('/',async(req,res)=>
+router.post('/',async(req,res,next)=>
 {
+    try
+    {
     const {username,email,password,name}=req.body;
     const user=new UserSchema({username,email,name});
     const registeredUser = await UserSchema.register(user, password);
@@ -19,6 +21,11 @@ router.post('/',async(req,res)=>
         req.flash('success', 'Welcome');
        return res.redirect('/');
     })
+    }
+    catch (e) {
+        req.flash('error', e.message);
+        res.redirect('/signup');
+    }   
     
 })
 module.exports = router;
