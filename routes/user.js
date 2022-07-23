@@ -7,10 +7,28 @@ const axios = require('axios');
 
 
 
+router.get('/profile', isLoggedIn,async (req, res) => {
+    const user=await User.findById(req.user.id);
+    res.render('users/editprofile',{user: user});
+})
+router.post('/profile', isLoggedIn, async (req, res) => {
+    const { username, email, name } = req.body;
+    const user = await User.findByIdAndUpdate(req.user.id, { username: username, email: email, name: name },{new:true});
+    
+    res.redirect('/portfolio');
+})
+
+
+
+
 router.get('/', isLoggedIn, async (req, res) => {
     console.log(req.user.id);
-    let user = await User.findOne({ _id: req.user.id });
+    const user = await User.findOne({ _id: req.user.id });
     console.log(user);
+    if(user.portfolio.length===0)
+    {
+        return res.render('users/addfunds', { username: user.name });
+    }
     let investment = user.portfolio[0].initialInvestmentAccordingToCoin;
     // console.log(user);
     let holding = user.portfolio[0].holdingAccordingToCoin;
@@ -28,27 +46,32 @@ router.get('/', isLoggedIn, async (req, res) => {
     //     element.price = response.data[`${element.coinName}`][`inr`];
     //     console.log(element.price);
     // });
-
+    let sum=0;
+    let netrevenue=0;
     let index = 0;
+    let size=holding.length;
     let priceArr = [];
     for await (let element of holding) {
-        // const baseURL = "https://api.coingecko.com/api/v3";
-        // const response = await axios.get(`${baseURL}/simple/price`, {
-        //     params: {
-        //         ids: `${element.coinName}`,
-        //         vs_currencies: 'INR'
-        //     }
-        // });
+        const baseURL = "https://api.coingecko.com/api/v3";
+        const response = await axios.get(`${baseURL}/simple/price`, {
+            params: {
+                ids: `${element.coinName}`,
+                vs_currencies: 'INR'
+            }
+        });
         // console.log(response.data[`${element.coinName}`][`inr`]);
-        priceArr.push(100);
+        priceArr.push(response.data[`${element.coinName}`][`inr`]);
+        sum += investment[index].initialInvestment;
         let percentage= (-investment[index].initialInvestment + element.numberOfCoins * priceArr[index]) / investment[index].initialInvestment;
         profitloss.push(percentage*100);
+        netrevenue += (-investment[index].initialInvestment + element.numberOfCoins * priceArr[index]) ;
         index = index + 1;
     }
+    console.log(sum,'OK');
     // console.log("hello world");
     let f = false;
     // console.log(holding);
-    res.render('users/dashboard', { f:f,arr: holding, price: priceArr ,profitloss:profitloss,username:user.username});
+    res.render('users/dashboard', { f:f,arr: holding, price: priceArr ,profitloss:profitloss,username:user.name,sum:sum,netrevenue:netrevenue,size:size});
 });
 
 
@@ -57,6 +80,9 @@ router.get('/:id', isLoggedIn, async (req, res) => {
     const user = await User.findOne({ _id: req.user.id });
 console.log(user);
     // console.log(user);
+    let sum=0;
+    let netrevenue=0;
+    let size=0;
     let investment = user.portfolio[0].initialInvestmentAccordingToCoinAndCompany;
     let holding = user.portfolio[0].holdingAccordingToCoinAndCompany;
 
@@ -67,22 +93,25 @@ console.log(user);
         return req.params.id === element.coinName;
     });
     const baseURL = "https://api.coingecko.com/api/v3";
-    // const response = await axios.get(`${baseURL}/simple/price`, {
-    //     params: {
-    //         ids: `${req.params.id}`,
-    //         vs_currencies: 'INR'
-    //     }
-    // });
-    let price = 100;
+    const response = await axios.get(`${baseURL}/simple/price`, {
+        params: {
+            ids: `${req.params.id}`,
+            vs_currencies: 'INR'
+        }
+    });
+    size=arr1.length;
+    let price = response.data[`${req.params.id}`][`inr`];
     let profitloss=[];
     arr.forEach((element,index) =>
     {
+        sum+=arr1[index].initialInvestment;
+        netrevenue += (element.numberOfCoins * price - arr1[index].initialInvestment) ;
         let percentage = (element.numberOfCoins * price - arr1[index].initialInvestment) / arr1[index].initialInvestment;
         profitloss.push(percentage*100);
     })
     let f=true;
     console.log(arr);
-    res.render('users/dashboard', { f: f, arr: arr, priceVal: price, profitloss: profitloss, username: user.username  });
+    res.render('users/dashboard', { f: f, arr: arr, priceVal: price, profitloss: profitloss, username: user.name, sum: sum, netrevenue: netrevenue, size: size  });
 });
 
 

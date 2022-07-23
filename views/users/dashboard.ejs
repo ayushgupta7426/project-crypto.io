@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
-    <title>Dashboard - NiceAdmin Bootstrap Template</title>
+    <title>Dashboard -Portfolio</title>
     <meta content="" name="description" />
     <meta content="" name="keywords" />
 
@@ -54,7 +54,7 @@
       <div class="d-flex align-items-center justify-content-between">
         <a href="index.html" class="logo d-flex align-items-center">
           <img src="../assets1/img/logo.png" alt="" />
-          <span class="d-none d-lg-block">NiceAdmin</span>
+          <span class="d-none d-lg-block">My Portfolio</span>
         </a>
         <i class="bi bi-list toggle-sidebar-btn"></i>
       </div>
@@ -198,7 +198,7 @@
               <li>
                 <a
                   class="dropdown-item d-flex align-items-center"
-                  href="users-profile.html"
+                  href="/users/profile"
                 >
                   <i class="bi bi-person"></i>
                   <span>My Profile</span>
@@ -225,7 +225,7 @@
               </li>
 
               <li>
-                <a class="dropdown-item d-flex align-items-center" href="#">
+                <a class="dropdown-item d-flex align-items-center" href="/logout">
                   <i class="bi bi-box-arrow-right"></i>
                   <span>Sign Out</span>
                 </a>
@@ -287,21 +287,13 @@
 
         <li class="nav-heading">Pages</li>
 
-        <li class="nav-item">
-          <a class="nav-link collapsed" href="pages-faq.html">
-            <i class="bi bi-question-circle"></i>
-            <span>F.A.Q</span>
-          </a>
-        </li>
-        <!-- End F.A.Q Page Nav -->
-
-        <li class="nav-item">
-          <a class="nav-link collapsed" href="pages-contact.html">
-            <i class="bi bi-envelope"></i>
-            <span>Contact</span>
-          </a>
-        </li>
-        <!-- End Contact Page Nav -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="/users/profile">
+          <i class="bi bi-person"></i>
+          <span>My Profile</span>
+        </a>
+      </li>
+      <!-- End F.A.Q Page Nav -->
 
         <li class="nav-item">
           <a class="nav-link collapsed" href="/logout">
@@ -319,7 +311,7 @@
         <h1>Dashboard</h1>
         <nav>
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
             <li class="breadcrumb-item active">Dashboard</li>
           </ol>
         </nav>
@@ -352,18 +344,18 @@
                   </div>
 
                   <div class="card-body">
-                    <h5 class="card-title">Sales <span>| Today</span></h5>
+                    <h5 class="card-title"> Total investment </h5>
 
                     <div class="d-flex align-items-center">
-                      <div
+                       <div
                         class="card-icon rounded-circle d-flex align-items-center justify-content-center"
                       >
-                        <i class="bi bi-cart"></i>
+                        <i class="bi bi-currency-dollar"></i>
                       </div>
                       <div class="ps-3">
-                        <h6>145</h6>
-                        <span class="text-success small pt-1 fw-bold">12%</span>
-                        <span class="text-muted small pt-2 ps-1">increase</span>
+                        
+                        <h6> <%=sum%></h6>
+                       
                       </div>
                     </div>
                   </div>
@@ -379,8 +371,7 @@
                       ><i class="bi bi-three-dots"></i
                     ></a>
                     <ul
-                      class="dropdown-menu dropdown-menu-end dropdown-menu-arrow"
-                    >
+                      class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                       <li class="dropdown-header text-start">
                         <h6>Filter</h6>
                       </li>
@@ -393,7 +384,7 @@
 
                   <div class="card-body">
                     <h5 class="card-title">
-                      Revenue <span>| This Month</span>
+                     Net Revenue
                     </h5>
 
                     <div class="d-flex align-items-center">
@@ -403,9 +394,16 @@
                         <i class="bi bi-currency-dollar"></i>
                       </div>
                       <div class="ps-3">
-                        <h6>$3,264</h6>
-                        <span class="text-success small pt-1 fw-bold">8%</span>
+                        <h6><%=netrevenue.toFixed(2)%></h6>
+                        <%if(netrevenue<sum)
+                        {%>
+                          <span class="text-danger small pt-1 fw-bold"><%=Math.abs(netrevenue/sum).toFixed(3)%><i class="bi bi-percent"></i></span>
+                          <span class="text-muted small pt-2 ps-1">decrease</span>
+                      <%}else{%>
+                        <span class="text-success small pt-1 fw-bold"><%=(netrevenue/sum).toFixed(3)%><i class="bi bi-percent"></i></span>
                         <span class="text-muted small pt-2 ps-1">increase</span>
+                        <%}%>
+                       
                       </div>
                     </div>
                   </div>
@@ -418,8 +416,7 @@
                 <div class="card info-card customers-card">
                   <div class="filter">
                     <a class="icon" href="#" data-bs-toggle="dropdown"
-                      ><i class="bi bi-three-dots"></i
-                    ></a>
+                      ><i class="bi bi-three-dots"></i></a>
                     <ul
                       class="dropdown-menu dropdown-menu-end dropdown-menu-arrow"
                     >
@@ -435,7 +432,11 @@
 
                   <div class="card-body">
                     <h5 class="card-title">
-                      Customers <span>| This Year</span>
+                      <%if(f==false){%>
+                      Total Coins Invested
+                      <%}else{%>
+                        Total Apps Invested
+                      <%}%>
                     </h5>
 
                     <div class="d-flex align-items-center">
@@ -445,9 +446,9 @@
                         <i class="bi bi-people"></i>
                       </div>
                       <div class="ps-3">
-                        <h6>1244</h6>
-                        <span class="text-danger small pt-1 fw-bold">12%</span>
-                        <span class="text-muted small pt-2 ps-1">decrease</span>
+                        <h6><%=size%></h6>
+                        
+                       
                       </div>
                     </div>
                   </div>
@@ -460,8 +461,7 @@
                 <div class="card">
                   <div class="filter">
                     <a class="icon" href="#" data-bs-toggle="dropdown"
-                      ><i class="bi bi-three-dots"></i
-                    ></a>
+                      ><i class="bi bi-three-dots"></i></a>
                     <ul
                       class="dropdown-menu dropdown-menu-end dropdown-menu-arrow"
                     >
@@ -576,7 +576,7 @@
 
                   <div class="card-body">
                     <h5 class="card-title">
-                      Recent Sales <span>| Today</span>
+                       <span>| Today</span>
                     </h5>
 
                     
@@ -589,7 +589,7 @@
                                   Coin
                                 </th>
                                 <!-- <th scope="col">Product</th> -->
-                                <th scope="col">Amount Invested</th>
+                                <th scope="col">Current Value</th>
                                 <th scope="col">Loss/gain</th>
                               </tr>
                             </thead>
@@ -605,7 +605,15 @@
                             <%= element.numberOfCoins * price[index]%>
                           </td>
                           <td>
-                            <span class="badge bg-success"><%=(Math.abs(profitloss[index])).toFixed(2)%></span>
+                            <%if(profitloss[index]<0){%>
+                              <span class="badge bg-danger">
+                                <%=((profitloss[index])).toFixed(2) %> <i class="bi bi-percent"></i>
+                              </span>
+                              <%}else{%>
+                                <span class="badge bg-success">
+                                  <%=((profitloss[index])).toFixed(2) %> <i class="bi bi-percent"></i>
+                                </span>
+                                <%}%>
                           </td>
                         </tr>
                         <% }) %> 
@@ -619,11 +627,11 @@
                               <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">
-                                  Coin
+                                  Trading apps
                                 </th>
                                 
-                                <th scope="col">Amount Invested</th>
-                                <th scope="col">Status</th>
+                                <th scope="col">Current Value</th>
+                                <th scope="col">Profit/Loss</th>
                               </tr>
                             </thead>
                             <tbody>
@@ -639,12 +647,24 @@
                                 <%= element.numberOfCoins * priceVal%>
                               </td>
                               <td>
-                                <span class="badge bg-success"><%=(Math.abs(profitloss[index])).toFixed(2)%></span>
+                                <%if(profitloss[index]<0){%>
+                                     <span class="badge bg-danger"><%=((profitloss[index])).toFixed(2) %> <i class="bi bi-percent"></i></span>
+                                <%}else{%>
+                                  <span class="badge bg-success">
+                                    <%=((profitloss[index])).toFixed(2) %> <i class="bi bi-percent"></i>
+                                  </span>
+                                <%}%>
+                                
                               </td>
                             </tr>
                             <% }) %> 
                               </tbody>
                     </table>
+                      <div class="d-flex justify-content-end">
+                        <form action="/portfolio">
+                        <button class="btn btn-outline-dark btn-sm" type="submit">Back To Main Portfolio</button>
+                        </form>
+                      </div> 
                           <% } %>  
                         
                     
@@ -829,7 +849,7 @@
     <!-- ======= Footer ======= -->
     <footer id="footer" class="footer">
       <div class="copyright">
-        &copy; Copyright <strong><span>NiceAdmin</span></strong
+        &copy; Copyright <strong><span>Your Portfolio</span></strong
         >. All Rights Reserved
       </div>
       <div class="credits">

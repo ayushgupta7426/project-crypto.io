@@ -189,7 +189,7 @@ router.post('/sell', isLoggedIn, async (req, res) => {
 
     console.log("body", typeof x, x, y, z);
 
-    const user = await User.findOne({ _id: req.user._id });
+    const user = await User.findOne({ _id: req.user.id });
 
     let portfolio = user.portfolio;
 

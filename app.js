@@ -15,9 +15,10 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const { middleware } = require('./middleware');
 const axios=require('axios');
-const port = process.env.PORT ||3000;
-const dotenv=require('dotenv');
+const port = process.env.PORT || 3000;
+const dotenv = require('dotenv');
 dotenv.config();
+
 
 
 
@@ -97,15 +98,15 @@ app.use((req, res, next) => {
 
 //routes
 app.get("/", async(req, res) => {
-    // const baseURL = "https://api.coingecko.com/api/v3";
-    // const response = await axios.get(`${baseURL}/simple/price`, {
-    //     params: {
-    //         ids: `bitcoin,ethereum,binancecoin`,
-    //         vs_currencies: 'INR'
-    //     }
-    // });
-//    let price=100;
-    res.render('index');
+    const baseURL = "https://api.coingecko.com/api/v3";
+    const response = await axios.get(`${baseURL}/simple/price`, {
+        params: {
+            ids: `bitcoin,ethereum,binancecoin`,
+            vs_currencies: 'INR'
+        }
+    });
+   
+    res.render('index',{response:response.data});
 });
 
 
@@ -114,9 +115,10 @@ app.use('/login', login);
 app.use('/logout', logout);
 app.use('/portfolio', user);
 app.use('/buysell', buysell);
+app.use('/users',user);
 
 //listen
 
 app.listen(port, () => {
-    console.log(`Serving on port ${port}`);
+    console.log('Serving on port 3000')
 })

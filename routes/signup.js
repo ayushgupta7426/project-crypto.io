@@ -12,7 +12,7 @@ router.get('/',(req,res)=>{
 router.post('/',async(req,res)=>
 {
     const {username,email,password,name}=req.body;
-    const user=new UserSchema({username,email});
+    const user=new UserSchema({username,email,name});
     const registeredUser = await UserSchema.register(user, password);
     req.login(registeredUser, err => {
         if (err) return next(err);

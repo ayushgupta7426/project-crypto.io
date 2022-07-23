@@ -1,0 +1,30 @@
+<%layout('layouts/boilerplate')%>
+    <h1>My Profile</h1>
+    <form action="/users/profile" method="POST" class="needs-validation" novalidate>
+
+        <div class="mb-3">
+            <label class="form-label" for="name">name</label>
+            <input class="form-control" type="text" id="name" name="name" value="<%=user.name%>" required>
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="username">Username</label>
+            <input class="form-control" type="text" id="username" name="username" value="<%=user.username%>" required >
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="email">Email</label>
+            <input class="form-control" type="email" id="email" name="email" value="<%=user.email%>" required>
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+        </div>
+       
+        <button class="btn btn-success">Save Changes</button>
+        
+        <button class="btn btn-success" type="submit" formaction="/portfolio">back to portfolio</button>
+    </form>
