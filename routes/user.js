@@ -67,7 +67,7 @@ router.get('/', isLoggedIn, async (req, res) => {
         netrevenue += (-investment[index].initialInvestment + element.numberOfCoins * priceArr[index]) ;
         index = index + 1;
     }
-    console.log(sum,'OK');
+    console.log(netrevenue,'OK');
     // console.log("hello world");
     let f = false;
     // console.log(holding);

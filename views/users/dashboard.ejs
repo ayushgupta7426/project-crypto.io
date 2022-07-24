@@ -52,7 +52,7 @@
     <!-- ======= Header ======= -->
     <header id="header" class="header fixed-top d-flex align-items-center">
       <div class="d-flex align-items-center justify-content-between">
-        <a href="index.html" class="logo d-flex align-items-center">
+        <a href="/portfolio" class="logo d-flex align-items-center">
           <img src="../assets1/img/logo.png" alt="" />
           <span class="d-none d-lg-block">My Portfolio</span>
         </a>
@@ -346,15 +346,13 @@
                   <div class="card-body">
                     <h5 class="card-title"> Total investment </h5>
 
-                    <div class="d-flex align-items-center">
-                       <div
-                        class="card-icon rounded-circle d-flex align-items-center justify-content-center"
-                      >
+                    <div class="d-flex align-items-center" >
+                       <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                         <i class="bi bi-currency-dollar"></i>
                       </div>
-                      <div class="ps-3">
+                      <div class="ps-3" >
                         
-                        <h6> <%=sum%></h6>
+                        <h6 style="font-size: 1.2rem"> <%=sum%></h6>
                        
                       </div>
                     </div>
@@ -364,7 +362,7 @@
               <!-- End Sales Card -->
 
               <!-- Revenue Card -->
-              <div class="col-xxl-4 col-md-6">
+              <div class="col-xxl-4 col-md-6 overflow-auto">
                 <div class="card info-card revenue-card">
                   <div class="filter">
                     <a class="icon" href="#" data-bs-toggle="dropdown"
@@ -382,7 +380,7 @@
                     </ul>
                   </div>
 
-                  <div class="card-body">
+                  <div class="card-body overflow-auto">
                     <h5 class="card-title">
                      Net Revenue
                     </h5>
@@ -394,8 +392,8 @@
                         <i class="bi bi-currency-dollar"></i>
                       </div>
                       <div class="ps-3">
-                        <h6><%=netrevenue.toFixed(2)%></h6>
-                        <%if(netrevenue<sum)
+                        <h6 style="font-size: 1.2rem"><%=netrevenue.toFixed(2)%></h6>
+                        <%if(netrevenue<0)
                         {%>
                           <span class="text-danger small pt-1 fw-bold"><%=Math.abs(netrevenue/sum).toFixed(3)%><i class="bi bi-percent"></i></span>
                           <span class="text-muted small pt-2 ps-1">decrease</span>
@@ -412,7 +410,7 @@
               <!-- End Revenue Card -->
 
               <!-- Customers Card -->
-              <div class="col-xxl-4 col-xl-12">
+              <div class="col-xxl-4 col-xl-12 overflow-auto">
                 <div class="card info-card customers-card">
                   <div class="filter">
                     <a class="icon" href="#" data-bs-toggle="dropdown"
@@ -433,9 +431,9 @@
                   <div class="card-body">
                     <h5 class="card-title">
                       <%if(f==false){%>
-                      Total Coins Invested
+                      Total Assets Invested
                       <%}else{%>
-                        Total Apps Invested
+                        Exchanges Used
                       <%}%>
                     </h5>
 
@@ -576,7 +574,7 @@
 
                   <div class="card-body">
                     <h5 class="card-title">
-                       <span>| Today</span>
+                       <span>Assets</span>
                     </h5>
 
                     

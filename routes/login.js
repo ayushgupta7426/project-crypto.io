@@ -12,7 +12,9 @@ router.get('/', async (req, res) => {
 })
 router.post('/', passport.authenticate('local', { failureFlash: true, failureRedirect: '/login' }), async (req, res) => {
     
+    const redirectUrl = req.session.returnTo || '/';
+    delete req.session.returnTo;
     req.flash('success', 'logged in');
-    res.redirect('/');
+    res.redirect(redirectUrl);
 })
 module.exports = router;

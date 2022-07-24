@@ -23,7 +23,7 @@ router.post('/',async(req,res,next)=>
     })
     }
     catch (e) {
-        req.flash('error', e.message);
+        req.flash('error', req.flash('error', 'bsdk same username mt daal'));
         res.redirect('/signup');
     }   
     
