@@ -594,7 +594,7 @@
                             <tbody>
                         <%arr.forEach((element,index) => { %>
                         <tr>
-                          <th scope="row"><a href="#">#2457</a></th>
+                          <th scope="row"><a href="#"><%= element.index %></a></th>
                           <td>
                             <a href="/portfolio/<%= element.coinName %>"><%= element.coinName %>
                             </a>
@@ -617,6 +617,7 @@
                         <% }) %> 
                           </tbody>
                           </table>
+                          
                        
                         
                         <% } else{ %>
@@ -635,7 +636,7 @@
                             <tbody>
                             <%arr.forEach((element,index)=> { %>
                             <tr>
-                              <th scope="row">#2457</th>
+                              <th scope="row"><%= element.index %></th>
                               <td>
                                 <a href="https://www.<%= element.companyName  %>.com ">
                                   <%= element.companyName %>
@@ -658,18 +659,29 @@
                             <% }) %> 
                               </tbody>
                     </table>
-                      <div class="d-flex justify-content-end">
-                        <form action="/portfolio">
-                        <button class="btn btn-outline-dark btn-sm" type="submit">Back To Main Portfolio</button>
-                        </form>
-                      </div> 
+                     
                           <% } %>  
                         
                     
-                  </div>
+                  
+                 </div>
                 </div>
               </div>
             </div>
+              <div class="d-flex align-items-center justify-content-between">
+                
+                <div class="d-flex justify-content-start">
+                  <form action="/buysell">
+                    <button class="btn btn-outline-dark btn-sm" type="submit">Buy assets</button>
+                  </form>
+                </div>
+                <div class="d-flex justify-content-end">
+                  <form action="/portfolio">
+                    <button class="btn btn-outline-dark btn-sm" type="submit">Back To Main Portfolio</button>
+                  </form>
+                </div>
+              </div>
+              
           </div>
 
           <div class="col-lg-4">
@@ -694,70 +706,7 @@
                   Budget Report <span>| This Month</span>
                 </h5>
 
-                <div
-                  id="budgetChart"
-                  style="min-height: 400px"
-                  class="echart"
-                ></div>
-
-                <script>
-                  document.addEventListener('DOMContentLoaded', () => {
-                    var budgetChart = echarts
-                      .init(document.querySelector('#budgetChart'))
-                      .setOption({
-                        legend: {
-                          data: ['Allocated Budget', 'Actual Spending'],
-                        },
-                        radar: {
-                          // shape: 'circle',
-                          indicator: [
-                            {
-                              name: 'Sales',
-                              max: 6500,
-                            },
-                            {
-                              name: 'Administration',
-                              max: 16000,
-                            },
-                            {
-                              name: 'Information Technology',
-                              max: 30000,
-                            },
-                            {
-                              name: 'Customer Support',
-                              max: 38000,
-                            },
-                            {
-                              name: 'Development',
-                              max: 52000,
-                            },
-                            {
-                              name: 'Marketing',
-                              max: 25000,
-                            },
-                          ],
-                        },
-                        series: [
-                          {
-                            name: 'Budget vs spending',
-                            type: 'radar',
-                            data: [
-                              {
-                                value: [4200, 3000, 20000, 35000, 50000, 18000],
-                                name: 'Allocated Budget',
-                              },
-                              {
-                                value: [
-                                  5000, 14000, 28000, 26000, 42000, 21000,
-                                ],
-                                name: 'Actual Spending',
-                              },
-                            ],
-                          },
-                        ],
-                      });
-                  });
-                </script>
+                <canvas id="myChart" width="400" height="400"></canvas>
               </div>
             </div>
             <div class="card">
@@ -878,5 +827,10 @@
 
     <!-- Template Main JS File -->
     <script src="../assets1/js/main.js"></script>
+
+
+    <script src="../../javascripts/chart.js"></script>
+
+
   </body>
 </html>

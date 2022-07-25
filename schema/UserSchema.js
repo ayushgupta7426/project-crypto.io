@@ -21,26 +21,26 @@ const passportLocalMongoose = require('passport-local-mongoose');
 const initialInvestmentAccordingToCoinSchema = new Schema({
     initialInvestment: {
         type: Number,
-        required: true,
-        default: true
+        required: true
+        
     }, // += x1
     coinName: {
         type: String,
         required: true,
-        unique: true
+        // unique:true
     }, // z (primary key)
 });
 
 const initialInvestmentAccordingToCoinAndCompanySchema = new Schema({
     initialInvestment: {
         type: Number,
-        required: true,
-        default: true
+        required: true
+       
     }, // += x1
     coinName: {
         type: String,
         required: true,
-        unique: true
+        // unique: true
     }, // z (primary key)
     companyName: {
         type: String,
@@ -53,12 +53,12 @@ const holdingAccordingToCoinSchema = new Schema({
     numberOfCoins: {
         type: Number,
         required: true,
-        default: true
+       
     },  // += x1/api(z1's price)
     coinName: {
         type: String,
         required: true,
-        unique: true
+        // unique: true
     }, // z (primary key)
 });
 
@@ -66,17 +66,17 @@ const holdingAccordingToCoinAndCompanySchema = new Schema({
     numberOfCoins: {
         type: Number,
         required: true,
-        default : true
+        
     },  // += x1/api(z1's price)
     coinName: {
         type: String,
         required: true,
-        unique: true
+        // unique: true
     }, // z (primary key)
     companyName: {
         type: String,
         required: true,
-        unique: true
+        // unique: true
     } // y1 (pk)
 });
 
@@ -86,7 +86,7 @@ const portfolioSchema = new Schema({
     initialInvestmentAccordingToCoinAndCompany: [initialInvestmentAccordingToCoinAndCompanySchema],
     holdingAccordingToCoin: [holdingAccordingToCoinSchema],
     holdingAccordingToCoinAndCompany: [holdingAccordingToCoinAndCompanySchema]
-
+    
 });
 
 const UserSchema = new Schema({

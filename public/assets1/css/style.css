@@ -17,6 +17,18 @@ body {
   background: #f6f9ff;
   color: #444444;
 }
+.services-card>h4 {
+  /* color: #0ECB81 !important; */
+  color: rgb(167 173 182) !important;
+  margin-top: 10px;
+}
+
+.services-card>p {
+  color: #0ECB81 !important;
+  margin-top: 10px;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
 
 a {
   color: #4154f1;

@@ -20,7 +20,63 @@ router.post('/profile', isLoggedIn, catchAsync( async (req, res) => {
     res.redirect('/portfolio');
 }))
 
+router.get("/chart/pie", isLoggedIn, async (req, res) => {
+    console.log("Hello world");
+    const user = await User.findOne({ _id: req.user.id });
+    const arr = user.portfolio[0].holdingAccordingToCoin;
 
+    let data = [];
+    for await (let element of arr) {
+        const baseURL = "https://api.coingecko.com/api/v3";
+        const response = await axios.get(`${baseURL}/simple/price`, {
+            params: {
+                ids: `${element.coinName}`,
+                vs_currencies: 'INR'
+            }
+        });
+
+        const obj = {
+            name: element.coinName,
+            currentPrice: response.data[`${element.coinName}`][`inr`] * element.numberOfCoins
+        }
+        data.push(obj);
+    }
+
+    // console.log(arr);
+    console.log(data);
+    data = JSON.stringify(data);
+    res.send(data);
+});
+router.get("/chart/pie/:id", isLoggedIn, async (req, res) => {
+    console.log("Hello world");
+    const user = await User.findOne({ _id: req.user.id });
+    const arr = user.portfolio[0].holdingAccordingToCoinAndCompany;
+
+    let data = [];
+    for await (let element of arr) {
+        if(element.coinName===req.params.id)
+        {
+        const baseURL = "https://api.coingecko.com/api/v3";
+        const response = await axios.get(`${baseURL}/simple/price`, {
+            params: {
+                ids: `${element.coinName}`,
+                vs_currencies: 'INR'
+            }
+        });
+
+        const obj = {
+            name: element.companyName,
+            currentPrice: response.data[`${element.coinName}`][`inr`] * element.numberOfCoins
+        }
+        data.push(obj);
+        }
+    }
+
+    // console.log(arr);
+    console.log(data);
+    data = JSON.stringify(data);
+    res.send(data);
+});
 
 
 router.get('/', isLoggedIn, catchAsync(async (req, res) => {
@@ -75,6 +131,8 @@ router.get('/', isLoggedIn, catchAsync(async (req, res) => {
     // console.log(holding);
     res.render('users/dashboard', { f:f,arr: holding, price: priceArr ,profitloss:profitloss,username:user.name,sum:sum,netrevenue:netrevenue,size:size});
 }));
+
+
 
 
 router.get('/:id', isLoggedIn, catchAsync(async (req, res) => {

@@ -19,11 +19,26 @@
   </div>
   <div class="mb-3">
     <label class="form-label" for="sharename">Invested In</label>
-    <input class="form-control" type="text" id="sharename" name="z" required />
+    <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="z">
+      <option value="bitcoin">BTC</option>
+      <option value="ethereum">ETH</option>
+      <option value="dogecoin">Doge</option>
+      <option value="binancecoin">BNB</option>
+      <option value="binance-peg-avalanche">Avax</option>
+      <option value="harmonycoin">One</option>
+      <option value="near">Near</option>
+      <option value="polkadot">Dot</option>
+      <option value="ripple">XRP</option>
+      <option value="matic-network">Matic</option>
+      <option value="cardano">ADA</option>
+    </select>
+   
     <div class="valid-feedback">Looks good!</div>
   </div>
   <button class="btn btn-success" type="submit">buy</button>
-  <button class="btn btn-success" type="submit" formaction="/buysell/sell">
-    sell
-  </button>
 </form>
+<div class="d-flex justify-content-end">
+  <form action="/portfolio">
+    <button class="btn btn-outline-dark btn-sm" type="submit">Back To Main Portfolio</button>
+  </form>
+</div>

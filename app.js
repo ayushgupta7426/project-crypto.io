@@ -14,7 +14,7 @@ const buysell = require('./routes/admin');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const { middleware } = require('./middleware');
-const axios=require('axios');
+const axios = require('axios');
 const port = process.env.PORT || 3000;
 const dotenv = require('dotenv');
 const catchAsync = require('./utils/catchAsync');
@@ -93,7 +93,7 @@ app.use((req, res, next) => {
     res.locals.currentUser = req.user;
     res.locals.success = req.flash('success');
     res.locals.error = req.flash('error');
-    
+
     next();
 })
 
@@ -104,17 +104,26 @@ app.use((req, res, next) => {
 
 
 //routes
-app.get("/", async(req, res) => {
+app.get("/", catchAsync(async (req, res) => {
     const baseURL = "https://api.coingecko.com/api/v3";
     const response = await axios.get(`${baseURL}/simple/price`, {
         params: {
             ids: `bitcoin,ethereum,binancecoin`,
-            vs_currencies: 'INR'
+            vs_currencies: 'USD'
         }
     });
-   
-    res.render('index',{response:response.data});
-});
+
+    console.log("Hello world");
+    const ids = `bitcoin,ethereum,dogecoin,binancecoin,binance-peg-avalanche,harmonycoin,polkadot,near,cardano`;
+    const r = await axios.get(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${ids}&order=market_cap_desc&per_page=100&page=1&sparkline=false`);
+
+    console.log(r.data);
+
+    // img , name , current_price , price_change_percentage_24h, market_cap_change_24h
+
+
+    res.render('index', { response: response.data, trendingCoin: r.data });
+}));
 
 
 app.use('/signup', signup);
@@ -122,7 +131,7 @@ app.use('/login', login);
 app.use('/logout', logout);
 app.use('/portfolio', user);
 app.use('/buysell', buysell);
-app.use('/users',user);
+app.use('/users', user);
 
 
 
@@ -132,9 +141,9 @@ app.all('*', (req, res, next) => {
 })
 
 app.use((err, req, res, next) => {
-    const { statusCode = 500,message } = err;
+    const { statusCode = 500, message } = err;
     if (!err.message) err.message = 'Oh No, Something Went Wrong!';
-    res.status(statusCode).render('users/error',{err});
+    res.status(statusCode).render('users/error', { err });
 })
 
 //listen
