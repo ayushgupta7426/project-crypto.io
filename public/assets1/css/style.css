@@ -19,6 +19,7 @@ body {
 }
 .services-card>h4 {
   /* color: #0ECB81 !important; */
+  
   color: rgb(167 173 182) !important;
   margin-top: 10px;
 }
