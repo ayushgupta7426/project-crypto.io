@@ -1,7 +1,7 @@
 
 const loc = window.location.href;
 const len = loc.length;
-const id = loc.substring(50, len);
+const id = loc.substring(48, len);
 
 
 // Bring in the API
