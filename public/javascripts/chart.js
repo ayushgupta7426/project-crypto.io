@@ -2,6 +2,7 @@
 const loc = window.location.href;
 const len = loc.length;
 const id = loc.substring(48, len);
+console.log(id);
 
 
 // Bring in the API
