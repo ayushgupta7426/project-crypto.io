@@ -901,14 +901,14 @@ section {
 --------------------------------------------------------------*/
 #services {
   /* background-color: rgb(24 26 32 / 95%) !important; */
-  background-color: #181A20!important;
+  /* background-color: #181A20!important; */
 }
 
 .services .icon-box {
   box-shadow: 0px 0 25px 0 rgba(0, 0, 0, 0.1);
   padding: 50px 30px;
   transition: all ease-in-out 0.4s;
-  background: #fff;
+  /* background: #fff; */
 }
 
 .services .icon-box .icon {
@@ -950,7 +950,7 @@ section {
 # Cta
 --------------------------------------------------------------*/
 .cta {
-  background: linear-gradient(rgba(40, 58, 90, 0.9), rgba(40, 58, 90, 0.9)), url("../img/cta-bg.jpg") fixed center center;
+  background: linear-gradient(rgba(40, 58, 90, 0.9), rgba(40, 58, 90, 0.9)), url("../img/cta-bg.webp") fixed center center;
   background-size: cover;
   padding: 120px 0;
 }

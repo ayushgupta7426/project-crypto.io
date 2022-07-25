@@ -102,7 +102,7 @@
 
   <main id="main">
 
-   
+ 
 
     <!-- ======= About Us Section ======= -->
     <section id="about" class="about">
@@ -136,6 +136,78 @@
 
       </div>
     </section><!-- End About Us Section -->
+    <!-- ======= Cta Section ======= -->
+    <section id="cta" class="cta">
+      <div class="container" data-aos="zoom-in">
+    
+        <!-- ======= Services Section ======= -->
+        <section id="services" class="services section ">
+          <div class="container" data-aos="fade-up">
+            <div class="services-cards ">
+              <div class="services-card">
+                <img src="../assets1/img/icons/Bitcoin-BTC-icon.png" />
+                <h4> BTC/USDT </h4>
+                <p>&#36; <%=response.bitcoin.usd%>
+                </p>
+              </div>
+              <div class="services-card">
+                <img src="../assets1/img/icons/ether.png" />
+                <h4> ETH/USDT </h4>
+                <p>&#36; <%=response.ethereum.usd%>
+                </p>
+              </div>
+              <div class="services-card">
+                <img src="../assets1/img/icons/binance.png" />
+                <h4> BNB/USDT </h4>
+                <p>&#36; <%=response.binancecoin.usd%>
+                </p>
+              </div>
+            </div>
+    
+          </div>
+        </section>
+    
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Name</th>
+              <th scope="col">Price</th>
+              <th scope="col">24hr Change</th>
+              <th scope="col">Market Cap</th>
+            </tr>
+          </thead>
+          <tbody>
+    
+            <% trendingCoin.forEach(coin=> { %>
+              <tr>
+                <th scope="row"><img style="width : 2rem;" src=<%=coin.image %> ></th>
+                <%if(coin.price_change_percentage_24h<0) {%>
+                  <td class="text-white">
+                    <%= coin.symbol.toUpperCase() %>
+                  </td>
+                  <td class="text-danger">&#36; <%= coin.current_price.toFixed(2) %>
+                  </td>
+                  <td class="text-danger">
+                    <%= coin.price_change_percentage_24h.toFixed(2) %> <i class="bi bi-percent"></i>
+                  </td>
+                  <td class="text-white">&#36; <%= Math.abs(coin.market_cap / 1000000).toFixed(2) %> M</td>
+                  <%}else{%>
+                    <td class="text-white">
+                      <%= coin.symbol.toUpperCase() %>
+                    </td>
+                    <td class="text-success">&#36; <%= coin.current_price.toFixed(2) %>
+                    </td>
+                    <td class="text-success">
+                      <%= coin.price_change_percentage_24h.toFixed(2) %> <i class="bi bi-percent"></i>
+                    </td>
+                    <td class="text-white">&#36; <%= Math.abs(coin.market_cap / 1000000).toFixed(2) %> M</td>
+                    <%}%>
+              </tr>
+              <% }) %>
+          </tbody>
+        </table>
+    </section><!-- End Cta Section -->
 
     <!-- ======= Why Us Section ======= -->
     <!-- ======= Why Us Section ======= -->
@@ -236,66 +308,8 @@
       </div>
     </section><!-- End Skills Section -->
 
-    <!-- ======= Services Section ======= -->
-    <section id="services" class="services section ">
-      <div class="container" data-aos="fade-up">
-      <div class="services-cards ">
-            <div class="services-card">
-                <img src="../assets1/img/icons/Bitcoin-BTC-icon.png" />
-                <h4> BTC/USDT </h4>
-                <p>&#36; <%=response.bitcoin.usd%></p>
-            </div>
-            <div class="services-card">
-                <img src="../assets1/img/icons/ether.png" />
-                <h4> ETH/USDT </h4>
-                <p>&#36; <%=response.ethereum.usd%></p>
-            </div>
-            <div class="services-card">
-                <img src="../assets1/img/icons/binance.png" />
-                <h4> BNB/USDT </h4>
-                <p>&#36; <%=response.binancecoin.usd%></p>
-            </div>
-        </div>
+    <!-- End Services Section -->
 
-      </div>
-    </section><!-- End Services Section -->
-
-    <!-- ======= Cta Section ======= -->
-    <section id="cta" class="cta">
-      <div class="container" data-aos="zoom-in">
-
-          <table class="table table-dark table-striped">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">Name</th>
-                <th scope="col">Price</th>
-                <th scope="col">24hr Change</th>
-                <th scope="col">Market Cap</th>
-              </tr>
-            </thead>
-            <tbody>
-
-              <% trendingCoin.forEach(coin => { %>
-                <tr>
-                  <th scope="row" ><img style="width : 2rem;" src=<%= coin.image %> ></th>
-                  <%if(coin.price_change_percentage_24h<0)
-                  {%>
-                  <td class="text-white"><%= coin.symbol.toUpperCase() %> </td>
-                  <td class="text-danger">&#36; <%= coin.current_price.toFixed(2) %> </td>
-                  <td class="text-danger"><%= coin.price_change_percentage_24h.toFixed(2) %> <i class="bi bi-percent"></i> </td>
-                  <td class="text-white">&#36; <%= Math.abs(coin.market_cap / 1000000).toFixed(2) %> M</td>
-                  <%}else{%>
-                  <td class="text-white"><%= coin.symbol.toUpperCase() %> </td>
-                  <td class="text-success">&#36; <%= coin.current_price.toFixed(2) %> </td>
-                  <td class="text-success"><%= coin.price_change_percentage_24h.toFixed(2) %> <i class="bi bi-percent"></i> </td>
-                  <td class="text-white">&#36; <%= Math.abs(coin.market_cap / 1000000).toFixed(2) %> M</td>
-                  <%}%>
-                </tr>
-              <% }) %>
-            </tbody>
-          </table>
-    </section><!-- End Cta Section -->
 
 
     <!-- displaying prices of various shares -->
