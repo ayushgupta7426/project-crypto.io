@@ -4,6 +4,8 @@ const UserSchema = require('../schema/UserSchema');
 const router = express.Router();
 const passport = require('passport');
 const { middleware } = require('../middleware');
+const catchAsync = require('../utils/catchAsync');
+const ExpressError = require('../utils/ExpressError');
 
 
 router.get('/', (req, res) => {

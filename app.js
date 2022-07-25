@@ -17,6 +17,12 @@ const { middleware } = require('./middleware');
 const axios=require('axios');
 const port = process.env.PORT || 3000;
 const dotenv = require('dotenv');
+const catchAsync = require('./utils/catchAsync');
+const ExpressError = require('./utils/ExpressError');
+
+
+
+
 dotenv.config();
 
 
@@ -117,6 +123,19 @@ app.use('/logout', logout);
 app.use('/portfolio', user);
 app.use('/buysell', buysell);
 app.use('/users',user);
+
+
+
+//error handlers
+app.all('*', (req, res, next) => {
+    next(new ExpressError('Page Not Found', 404))
+})
+
+app.use((err, req, res, next) => {
+    const { statusCode = 500,message } = err;
+    if (!err.message) err.message = 'Oh No, Something Went Wrong!';
+    res.status(statusCode).render('users/error',{err});
+})
 
 //listen
 

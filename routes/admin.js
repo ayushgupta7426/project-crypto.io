@@ -4,6 +4,8 @@ const User = require('../schema/UserSchema');
 const router = express.Router();
 const { isLoggedIn } = require('../middleware');
 const axios = require('axios');
+const catchAsync = require('../utils/catchAsync');
+const ExpressError = require('../utils/ExpressError');
 
 
 
@@ -12,7 +14,7 @@ router.get('/', isLoggedIn, (req, res) => {
     res.render('admin/buysellform');
 })
 
-router.post('/buy', isLoggedIn, async (req, res) => {
+router.post('/buy', isLoggedIn, catchAsync(async (req, res) => {
     // console.log("user ID from req.user", req.user._id);
     const userId = req.user.id;
     const { x1, y, z } = req.body;
@@ -175,9 +177,9 @@ router.post('/buy', isLoggedIn, async (req, res) => {
     const finalUser = await User.findOneAndUpdate({ _id: userId }, { portfolio });
 
     res.redirect("/buysell");
-});
+}));
 
-router.post('/sell', isLoggedIn, async (req, res) => {
+router.post('/sell', isLoggedIn,catchAsync( async (req, res) => {
     // console.log("user ID from req.user", req.user._id);
     const userId = req.user._id;
     const { x1, y, z } = req.body;
@@ -302,7 +304,7 @@ router.post('/sell', isLoggedIn, async (req, res) => {
 
     console.log("User after update", finalUser);
     res.redirect("/buysell");
-});
+}));
 
 
 

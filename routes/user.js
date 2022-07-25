@@ -4,24 +4,26 @@ const User = require('../schema/UserSchema');
 const router = express.Router();
 const { isLoggedIn } = require('../middleware');
 const axios = require('axios');
+const catchAsync=require('../utils/catchAsync');
+const ExpressError=require('../utils/ExpressError');
 
 
 
-router.get('/profile', isLoggedIn,async (req, res) => {
+router.get('/profile', isLoggedIn, catchAsync(async (req, res) => {
     const user=await User.findById(req.user.id);
     res.render('users/editprofile',{user: user});
-})
-router.post('/profile', isLoggedIn, async (req, res) => {
+}))
+router.post('/profile', isLoggedIn, catchAsync( async (req, res) => {
     const { username, email, name } = req.body;
     const user = await User.findByIdAndUpdate(req.user.id, { username: username, email: email, name: name },{new:true});
     
     res.redirect('/portfolio');
-})
+}))
 
 
 
 
-router.get('/', isLoggedIn, async (req, res) => {
+router.get('/', isLoggedIn, catchAsync(async (req, res) => {
     console.log(req.user.id);
     const user = await User.findOne({ _id: req.user.id });
     console.log(user);
@@ -72,10 +74,10 @@ router.get('/', isLoggedIn, async (req, res) => {
     let f = false;
     // console.log(holding);
     res.render('users/dashboard', { f:f,arr: holding, price: priceArr ,profitloss:profitloss,username:user.name,sum:sum,netrevenue:netrevenue,size:size});
-});
+}));
 
 
-router.get('/:id', isLoggedIn, async (req, res) => {
+router.get('/:id', isLoggedIn, catchAsync(async (req, res) => {
     
     const user = await User.findOne({ _id: req.user.id });
 console.log(user);
@@ -112,7 +114,7 @@ console.log(user);
     let f=true;
     console.log(arr);
     res.render('users/dashboard', { f: f, arr: arr, priceVal: price, profitloss: profitloss, username: user.name, sum: sum, netrevenue: netrevenue, size: size  });
-});
+}));
 
 
 
