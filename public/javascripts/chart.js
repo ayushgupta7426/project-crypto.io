@@ -4,6 +4,7 @@ const len = loc.length;
 const id = loc.substring(48, len);
 console.log(loc);
 console.log(id);
+console.dir(this);
 
 
 // Bring in the API
@@ -67,5 +68,5 @@ xhttp.onload = function () {
 }
 
 // Send a request
-xhttp.open("GET", `https://my-portfolio8619.herokuapp.com/portfolio/chart/pie/${id}`,true);
+xhttp.open("GET", `https://my-portfolio8619.herokuapp.com/portfolio/chart/pie/${id}`);
 xhttp.send();
