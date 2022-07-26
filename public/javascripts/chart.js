@@ -68,5 +68,5 @@ xhttp.onload = function () {
 }
 
 // Send a request
-xhttp.open("GET", `https://my-portfolio8619.herokuapp.com/portfolio/chart/pie/${id}`);
+xhttp.open("GET", `http://my-portfolio8619.herokuapp.com/portfolio/chart/pie/${id}`);
 xhttp.send();
