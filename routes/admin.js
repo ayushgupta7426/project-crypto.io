@@ -175,7 +175,7 @@ router.post('/buy', isLoggedIn, catchAsync(async (req, res) => {
 
 
     const finalUser = await User.findOneAndUpdate({ _id: userId }, { portfolio });
-
+    req.flash('success','Asset Bought Successfully ');
     res.redirect("/buysell");
 }));
 
