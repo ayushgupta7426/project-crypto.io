@@ -42,7 +42,7 @@ router.get("/chart/pie", isLoggedIn, async (req, res) => {
         data.push(obj);
     }
 
-    console.log(data);
+    // console.log(data);
     // console.log(data);
     data = JSON.stringify(data);
     console.log(data);
