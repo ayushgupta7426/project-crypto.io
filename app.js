@@ -19,6 +19,8 @@ const port = process.env.PORT || 3000;
 const dotenv = require('dotenv');
 const catchAsync = require('./utils/catchAsync');
 const ExpressError = require('./utils/ExpressError');
+const cors =require('cors');
+
 
 
 
@@ -86,6 +88,7 @@ app.set('views', path.join(__dirname, 'views'))
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(cors());
 
 
 
