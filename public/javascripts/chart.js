@@ -1,7 +1,7 @@
 
 const loc = window.location.href;
 const len = loc.length;
-const id = loc.substring(49, len);
+const id = loc.substring(48, len);
 console.log(loc);
 console.log(id);
 console.dir(this);
