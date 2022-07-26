@@ -21,7 +21,7 @@ router.post('/profile', isLoggedIn, catchAsync( async (req, res) => {
 }))
 
 router.get("/chart/pie", isLoggedIn, async (req, res) => {
-    console.log("Hello world");
+    // console.log("Hello world");
     const user = await User.findOne({ _id: req.user.id });
     const arr = user.portfolio[0].holdingAccordingToCoin;
 
@@ -43,7 +43,7 @@ router.get("/chart/pie", isLoggedIn, async (req, res) => {
     }
 
     // console.log(arr);
-    console.log(data);
+    // console.log(data);
     data = JSON.stringify(data);
     res.send(data);
 });
@@ -80,9 +80,9 @@ router.get("/chart/pie/:id", isLoggedIn, async (req, res) => {
 
 
 router.get('/', isLoggedIn, catchAsync(async (req, res) => {
-    console.log(req.user.id);
+    // console.log(req.user.id);
     const user = await User.findOne({ _id: req.user.id });
-    console.log(user);
+    // console.log(user);
     if(user.portfolio.length===0)
     {
         return res.render('users/addfunds', { username: user.name });
@@ -90,7 +90,7 @@ router.get('/', isLoggedIn, catchAsync(async (req, res) => {
     let investment = user.portfolio[0].initialInvestmentAccordingToCoin;
     // console.log(user);
     let holding = user.portfolio[0].holdingAccordingToCoin;
-    console.log(holding);
+    // console.log(holding);
     let profitloss=[];
     // holding.forEach(async (element) => {
     //     const baseURL = "https://api.coingecko.com/api/v3";
@@ -125,7 +125,7 @@ router.get('/', isLoggedIn, catchAsync(async (req, res) => {
         netrevenue += (-investment[index].initialInvestment + element.numberOfCoins * priceArr[index]) ;
         index = index + 1;
     }
-    console.log(netrevenue,'OK');
+    // console.log(netrevenue,'OK');
     // console.log("hello world");
     let f = false;
     // console.log(holding);
@@ -138,7 +138,7 @@ router.get('/', isLoggedIn, catchAsync(async (req, res) => {
 router.get('/:id', isLoggedIn, catchAsync(async (req, res) => {
     
     const user = await User.findOne({ _id: req.user.id });
-console.log(user);
+// console.log(user);
     // console.log(user);
     let sum=0;
     let netrevenue=0;
@@ -170,7 +170,7 @@ console.log(user);
         profitloss.push(percentage*100);
     })
     let f=true;
-    console.log(arr);
+    // console.log(arr);
     res.render('users/dashboard', { f: f, arr: arr, priceVal: price, profitloss: profitloss, username: user.name, sum: sum, netrevenue: netrevenue, size: size  });
 }));
 

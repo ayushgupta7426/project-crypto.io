@@ -14,6 +14,7 @@ xhttp.onload = function () {
     // Here you can use the Data
 
     const response = JSON.parse(this.responseText);
+    
     // console.log(this);
     // const response = this.responseText;
     // console.log(response);
